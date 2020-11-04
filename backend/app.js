@@ -3,7 +3,6 @@ const express = require('express');
 const parseJSON = require("body-parser").json();
 const bcrypt = require('bcrypt');
 const JWT = require('jsonwebtoken');
-const { without } = require('lodash');
 const { ObjectID } = require('mongodb');
 function App(db, secret) {
   let app = express();
@@ -13,21 +12,10 @@ function App(db, secret) {
   const customerCollection = db.collection('customer');
 
   app.get('/', (req, res, next) => {
+    res.set('content-type', 'text/html')
     res.write('Hi there!')
     res.end();
   });
-
-
-  const checkBodyStructure = function (body, args) {
-    if (Array.isArray(args)) {
-      for (let x of args) {
-        if (!body[x]) return false;
-      }
-      return true;
-    }
-    else
-      return !!body[args]
-  }
 
   app.post('/admin/login', parseJSON, (req, res, next) => {
     if (!req.body.username || !req.body.password) {
