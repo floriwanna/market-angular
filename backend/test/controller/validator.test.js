@@ -1,5 +1,4 @@
-var assert = require('assert');
-const { Db } = require('mongodb');
+const assert = require('assert');
 describe('Array', function () {
     describe('#indexOf()', function () {
         it('should return -1 when the value is not present', function () {
@@ -10,8 +9,7 @@ describe('Array', function () {
 });
 
 describe('Validator.js', function () {
-    const validator = require('../app/validator');
-    //const app = new App(db, 'secret');
+    const validator = require('../../app/controller/validator');
     describe('function checkBodyStructure', () => {
         let body = { first_prop: 'value one', other_prop: 'other value', last_prop: 'last value' };
 
