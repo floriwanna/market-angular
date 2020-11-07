@@ -4,9 +4,9 @@ const parseJSON = require("body-parser").json();
 const bcrypt = require('bcrypt');
 const JWT = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
+
 function App(db, secret) {
   let app = express();
-
 
   const usersCollection = db.collection('users');
   const customerCollection = db.collection('customer');
