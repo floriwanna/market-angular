@@ -12,7 +12,7 @@ describe('first HTTP test', () => {
         chai.request(app).get('/').end((err, res) => {
             res.should.have.status(200);
             res.text.should.equal('Hi there!');
-            done();
         })
+
     })
 });
