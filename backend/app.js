@@ -4,6 +4,7 @@ const parseJSON = require("body-parser").json();
 const bcrypt = require('bcrypt');
 const JWT = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
+const utils = require('./app/service/validator');
 
 function App(db, secret) {
   let app = express();
@@ -11,13 +12,9 @@ function App(db, secret) {
   const usersCollection = db.collection('users');
   const customerCollection = db.collection('customer');
 
-  app.get('/', (req, res, next) => {
-    res.set('content-type', 'text/html')
-    res.write('Hi there!')
-    res.end();
-  });
-
-  app.post('/admin/login', parseJSON, (req, res, next) => {
+  app.use('/', require('./app/controller/public')());
+  
+  app.post('/admin/signin', parseJSON, (req, res, next) => {
     if (!req.body.username || !req.body.password) {
       res.statusCode = 400;
       res.end();
@@ -41,7 +38,7 @@ function App(db, secret) {
     });
   });
 
-  app.post("/login", parseJSON, (req, res, next) => {
+  app.post("/signin", parseJSON, (req, res, next) => {
     if (!req.body.username || !req.body.password) {
       res.statusCode = 400
       res.end(); return;
@@ -63,9 +60,9 @@ function App(db, secret) {
     });
   })
 
-  app.post('/signin', parseJSON, (req, res, next) => {
+  app.post('/signup', parseJSON, (req, res, next) => {
 
-    if (!checkBodyStructure(req.body, ['username', 'password', 'email'])) {
+    if (!utils.checkBodyStructure(req.body, ['username', 'password', 'email'])) {
       res.statusCode = 400;
       res.end();
       return
@@ -74,7 +71,7 @@ function App(db, secret) {
     customerCollection.findOne({ email: req.body.email }, (err, doc) => {
       if (!doc) {
         // Add new user
-        bcrypt.hash(body.password, 10, (err, encrypted) => {
+        bcrypt.hash(req.body.password, 10, (err, encrypted) => {
 
           customerCollection.insertOne({
             name: req.body.name,
