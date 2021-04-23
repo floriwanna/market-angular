@@ -1,0 +1,13 @@
+<mat-card style="max-width: 400px; text-align: center;">
+   <mat-card-title>Login required</mat-card-title>
+    <mat-form-field appearance="fill">
+        <input matInput placeholder="Username" [(ngModel)]="data.username">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <input matInput placeholder="Password" type="password" [(ngModel)]="data.password">
+    </mat-form-field>
+
+    <mat-card-actions>
+        <button mat-raised-button style="width: 100%" color="primary" (click)="tryLogin()" cdkFocusInitial>Log in</button>
+    </mat-card-actions>
+</mat-card>
