@@ -9,6 +9,8 @@ export class SidebarMenuComponent implements OnInit {
 
   constructor() { }
 
+  public menuElements = [{ title: 'productos', url: '/products' }, { title: 'categorias', url: '/categories' }, { title: 'usuarios', url: '/users' }];
+
   ngOnInit(): void {
   }
 
