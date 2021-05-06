@@ -1,2 +1,3 @@
 ## Que continuar
--   Terminar el comportamiento del toggle en admin
+-   
+-   Que el servicio de sidebar consiga los items de menu del usuario
