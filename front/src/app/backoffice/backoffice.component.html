@@ -1,5 +1,6 @@
   <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button mat-icon-button class="example-icon" (click)="toggleMenuBar()"
+      aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
     <span>My App</span>
@@ -13,6 +14,7 @@
   </mat-toolbar>
 
   <app-sidebar-menu>
-    <div>Admin </div>
-    <router-outlet></router-outlet>
+    <div class="container">Admin
+      <router-outlet></router-outlet>
+    </div>
   </app-sidebar-menu>

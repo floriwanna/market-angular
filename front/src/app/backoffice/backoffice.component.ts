@@ -1,4 +1,6 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { SidebarMenuService } from './sidebar-menu/sidebar-menu.service';
 
 @Component({
   selector: 'app-backoffice',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BackofficeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sidebarMenuService: SidebarMenuService) { }
 
   ngOnInit(): void {
   }
 
+  public toggleMenuBar() {
+    this.sidebarMenuService.toggle();
+  }
 }

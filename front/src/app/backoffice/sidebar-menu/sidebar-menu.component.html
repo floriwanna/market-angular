@@ -1,12 +1,12 @@
-<mat-drawer-container class="example-container" [hasBackdrop]="false">
+<mat-drawer-container [hasBackdrop]="false">
   <mat-drawer #drawer [mode]="true">
     <mat-list>
       <mat-list-item *ngFor="let menuEle of menuElements">{{ menuEle.title }}</mat-list-item>
     </mat-list>
   </mat-drawer>
 
-  <mat-drawer-content>
+  <ng-content></ng-content>
+  <!-- <mat-drawer-content>
     <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
-    <ng-content></ng-content>
-  </mat-drawer-content>
+  </mat-drawer-content> -->
 </mat-drawer-container>
