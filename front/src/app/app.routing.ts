@@ -35,7 +35,7 @@ const routes: Routes = [
     // },
     { path: 'login', pathMatch: "full", component: CustomerLoginComponent },
     { path: 'admin/login', pathMatch: "full", component: AdminLoginComponent },
-    {
+    {//SHOP
         path: "",
         component: ShopComponent,
         children: [
@@ -46,7 +46,7 @@ const routes: Routes = [
             },
         ],
     },
-    {
+    {//ADMIN
         path: "admin",
         component: BackofficeComponent,
         children: [
