@@ -19,4 +19,14 @@ export class SidebarMenuService {
     this.content.next(this.visible);
   }
 
+  public getMenuItems(): Promise<SidebarMenuItem[]> {
+    return new Promise((resolve, reject) => {
+      resolve([{ title: 'usuarios', url: '/user' }]);
+    })
+  }
+}
+
+export class SidebarMenuItem {
+  public title: string;
+  public url: string;
 }

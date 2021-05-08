@@ -1,8 +1,14 @@
 <mat-drawer-container [hasBackdrop]="false">
-  <mat-drawer #drawer [mode]="true">
-    <mat-list>
+  <mat-drawer #drawer mode="side">
+    <!-- <mat-list>
       <mat-list-item *ngFor="let menuEle of menuElements">{{ menuEle.title }}</mat-list-item>
-    </mat-list>
+    </mat-list> -->
+
+    <mat-selection-list #shoes [multiple]="false">
+      <mat-list-option *ngFor="let menuEle of menuElements" [value]="shoe" (click)="redirect(menuEle.url)">
+        {{ menuEle.title }}
+      </mat-list-option>
+    </mat-selection-list>
   </mat-drawer>
 
   <ng-content></ng-content>
