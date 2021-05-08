@@ -9,15 +9,18 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { SidebarMenuService } from './sidebar-menu/sidebar-menu.service';
+import { CustomerUserComponent } from './customer-user/customer-user.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: "full", component: OfficeHomeComponent },
+  { path: 'user', pathMatch: "full", component: CustomerUserComponent },
 ];
 
 @NgModule({
   declarations: [BackofficeComponent,
-    SidebarMenuComponent],
+    SidebarMenuComponent,
+    CustomerUserComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
