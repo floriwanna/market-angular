@@ -9,12 +9,17 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'detalle', component: ItemDetailComponent }
+  {
+    path: '', component: ShopComponent,
+    children: [
+      { path: '', component: HomeComponent, outlet: 'main' },
+      { path: 'detalle', component: ItemDetailComponent, outlet: 'main'}
+    ]
+  }
 ];
 
 @NgModule({
-  declarations: [ShopComponent],
+  declarations: [ShopComponent, HomeComponent, ItemDetailComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
