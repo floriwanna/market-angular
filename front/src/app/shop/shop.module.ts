@@ -6,17 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
-
-
-const routes: Routes = [
-  {
-    path: '', component: ShopComponent,
-    children: [
-      { path: '', component: HomeComponent, outlet: 'main' },
-      { path: 'detalle', component: ItemDetailComponent, outlet: 'main'}
-    ]
-  }
-];
+import { ShopRoutes } from './shop.routing';
 
 @NgModule({
   declarations: [ShopComponent, HomeComponent, ItemDetailComponent],
@@ -24,7 +14,7 @@ const routes: Routes = [
     CommonModule,
     MatToolbarModule,
     MatIconModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(ShopRoutes)
   ]
 })
 

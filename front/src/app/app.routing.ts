@@ -9,7 +9,6 @@ import { ShopComponent } from "./shop/shop.component";
 
 
 const routes: Routes = [
-    { path: 'login', pathMatch: "full", component: CustomerLoginComponent },
     { path: 'admin/login', pathMatch: "full", component: AdminLoginComponent },
     {//ADMIN
         path: "admin",
@@ -28,18 +27,20 @@ const routes: Routes = [
         ],
         // canActivate: [AuthGuardService]
     },
-    {//SHOP
+    { path: 'login', pathMatch: "full", component: CustomerLoginComponent },
+    // {
+    //     path: "",
+    //     redirectTo: "home",
+    //     pathMatch: "full",
+    // },
+    {
         path: "",
         component: ShopComponent,
-        pathMatch: 'full',
         children: [
             {
                 path: "",
-                resolve: {
-                    // currentPermissions: CurrentPermissionResolve,
-                },
                 loadChildren: () =>
-                    import("./shop/shop.module").then((x) => { console.log(x.ShopModule); return x.ShopModule; }),
+                    import("./shop/shop.module").then((x) => x.ShopModule),
             },
         ],
     },
@@ -52,7 +53,7 @@ const routes: Routes = [
         BrowserModule,
         RouterModule.forRoot(routes, {
             useHash: false,
-        })
+        }),
     ],
     exports: [],
 })
