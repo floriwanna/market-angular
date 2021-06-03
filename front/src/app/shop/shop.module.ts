@@ -12,8 +12,8 @@ const routes: Routes = [
   {
     path: '', component: ShopComponent,
     children: [
-      { path: '', component: HomeComponent, outlet: 'main' },
-      { path: 'detalle', component: ItemDetailComponent, outlet: 'main'}
+      { path: '', component: HomeComponent },
+      { path: 'detalle', component: ItemDetailComponent}
     ]
   }
 ];
