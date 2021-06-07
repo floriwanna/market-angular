@@ -10,7 +10,7 @@ import { CustomerLoginService } from '../customer-login/customer-login.service';
 })
 export class ShopComponent implements OnInit {
 
-  constructor(private loginService: CustomerLoginService) {
+  constructor(private loginService: CustomerLoginService, private router: Router) {
 
   }
 
@@ -20,5 +20,7 @@ export class ShopComponent implements OnInit {
   showAuthenticate(): Boolean {
     return this.loginService.isAuthenticated(true);
   }
+
+  public toHome() { this.router.navigate(['']) }
 
 }
