@@ -3,7 +3,9 @@ const express = require('express');
 const parseJSON = require("body-parser").json();
 const bcrypt = require('bcrypt');
 const JWT = require('jsonwebtoken');
-const { ObjectID } = require('mongodb');
+const {
+  ObjectID
+} = require('mongodb');
 const utils = require('./app/service/validator');
 
 function App(db, secret) {
@@ -12,14 +14,16 @@ function App(db, secret) {
   const usersCollection = db.collection('users');
   const customerCollection = db.collection('customer');
 
-  app.use('/', require('./app/controller/public')());
-  
+  app.use('/', require('./app/controller/public')(db));
+
   app.post('/admin/signin', parseJSON, (req, res, next) => {
     if (!req.body.username || !req.body.password) {
       res.statusCode = 400;
       res.end();
     }
-    usersCollection.findOne({ username: req.body.username }, (err, doc) => {
+    usersCollection.findOne({
+      username: req.body.username
+    }, (err, doc) => {
       if (err)
         return next(err);
       if (!doc) return next(new Error("invalid username"));
@@ -41,9 +45,12 @@ function App(db, secret) {
   app.post("/signin", parseJSON, (req, res, next) => {
     if (!req.body.username || !req.body.password) {
       res.statusCode = 400
-      res.end(); return;
+      res.end();
+      return;
     }
-    customerCollection.findOne({ username: req.body.username }, (err, doc) => {
+    customerCollection.findOne({
+      username: req.body.username
+    }, (err, doc) => {
       if (err)
         return next(err);
       if (!doc || doc["password"]) return next(new Error("invalid username"));
@@ -68,7 +75,9 @@ function App(db, secret) {
       return
     }
 
-    customerCollection.findOne({ email: req.body.email }, (err, doc) => {
+    customerCollection.findOne({
+      email: req.body.email
+    }, (err, doc) => {
       if (!doc) {
         // Add new user
         bcrypt.hash(req.body.password, 10, (err, encrypted) => {
@@ -96,7 +105,9 @@ function App(db, secret) {
           return;
         }
         bcrypt.hash(body.password, bcrypt.genSalt(), (err, encrypted) => {
-          customerCollection.updateOne({ _id: ObjectID(doc._id) }, {
+          customerCollection.updateOne({
+            _id: ObjectID(doc._id)
+          }, {
             '$set': {
               name: req.body.name,
               lastname: req.body.lastname,

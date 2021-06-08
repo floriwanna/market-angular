@@ -15,9 +15,10 @@ if (config.util.getEnv('NODE_ENV') == 'test') {
 
 
 const dbConn = `${config.dbUrl}/${config.dbName}`;
-console.log(dbConn)
-MongoClient.connect(dbConn, { useUnifiedTopology: true }, function (err, client) {
+MongoClient.connect(dbConn, {
+    useUnifiedTopology: true
+}, function (err, client) {
     const App = require('./app');
-    let app = new App(client.db(), config.secret);
+    let app = new App(client.db('market'), config.secret);
     app.listen(config.port);
 })
