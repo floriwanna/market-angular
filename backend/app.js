@@ -15,6 +15,7 @@ function App(db, secret) {
   const customerCollection = db.collection('customer');
 
   app.use('/', require('./app/controller/public')(db));
+  app.use('/products', require('./app/controller/product')(db));
 
   app.post('/admin/signin', parseJSON, (req, res, next) => {
     if (!req.body.username || !req.body.password) {

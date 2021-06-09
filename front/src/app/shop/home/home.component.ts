@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Product } from '../model/product';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +10,18 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  public products;
+
+  constructor(private router: Router
+    , private productsService: ProductsService
+  ) { }
 
   ngOnInit(): void {
+    this.productsService.getHomeTopProducts().then(res => { this.products = res });
   }
 
-  products = [
-    { id: 1, title: 'p1', price: 3, color: 'lightblue' },
-    { id: 2, title: 'p2', price: 1, color: 'lightgreen' },
-    { id: 3, title: 'p3', price: 1, color: 'lightpink' },
-  ];
 
   public showProduct(id) {
     this.router.navigate(['/product/' + id]);
-
   }
 }

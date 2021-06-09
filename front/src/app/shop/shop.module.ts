@@ -9,6 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ShopRoutes } from './shop.routing';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductsService } from './services/products.service';
+import { DesignService } from './services/design.service';
 
 @NgModule({
   declarations: [ShopComponent, HomeComponent, ProductDetailComponent],
@@ -19,7 +20,7 @@ import { ProductsService } from './services/products.service';
     MatGridListModule,
     RouterModule.forChild(ShopRoutes)
   ],
-  providers: [ProductsService]
+  providers: [ProductsService, DesignService]
 })
 
 export class ShopModule { }

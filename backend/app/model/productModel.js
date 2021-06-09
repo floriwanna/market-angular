@@ -2,9 +2,12 @@ module.exports = function ProductModel(db) {
     const collection = db.collection("products");
     return {
         all: () => {
-            collection.find({}).toArray((err, docs) => {
-                if (err) return next(err);
-                return docs;
+            return new Promise((resolve, reject) => {
+                collection.find({}).toArray((err, docs) => {
+                    if (err) reject(err);
+                    resolve(docs);
+                });
+
             });
         },
         getOne: (id) => {
