@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { promise } from 'selenium-webdriver';
-import { Category } from '../model/category';
-import { Product } from '../model/product';
+import { Category } from '../../model/category';
+import { Product } from '../../model/product';
 
 @Injectable()
 export class ProductsService {
@@ -11,9 +11,9 @@ export class ProductsService {
 
 
   private products = [
-    { id: '1', title: 'p1', price: 3 } as Product,
-    { id: '2', title: 'p2', price: 1 } as Product,
-    { id: '3', title: 'p3', price: 1 } as Product,
+    { id: '1', name: 'p1', unit_price: 3 } as Product,
+    { id: '2', name: 'p2', unit_price: 1 } as Product,
+    { id: '3', name: 'p3', unit_price: 1 } as Product,
   ];
 
   public getHomeTopProducts() {

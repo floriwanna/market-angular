@@ -10,17 +10,22 @@ import { ShopRoutes } from './shop.routing';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductsService } from './services/products.service';
 import { DesignService } from './services/design.service';
+import { CartComponent } from './cart/cart.component';
+import { CartService } from './services/cart.service';
+import { CheckoutService } from './services/checkout.service';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  declarations: [ShopComponent, HomeComponent, ProductDetailComponent],
+  declarations: [ShopComponent, HomeComponent, ProductDetailComponent, CartComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
     MatIconModule,
+    MatCardModule,
     MatGridListModule,
     RouterModule.forChild(ShopRoutes)
   ],
-  providers: [ProductsService, DesignService]
+  providers: [ProductsService, DesignService, CartService, CheckoutService]
 })
 
 export class ShopModule { }

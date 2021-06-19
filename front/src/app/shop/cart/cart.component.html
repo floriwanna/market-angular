@@ -1,0 +1,38 @@
+<mat-card class="cart-small">
+  <mat-card-content>
+    <mat-card-title>
+
+    </mat-card-title>
+    <!-- <a [routerLink]=" ['/product/detail',item.id]">{{ item.name }}</a> -->
+    <mat-grid-list cols="12" rowHeight="150px" *ngFor="let item of cartItems; last as last">
+      <mat-grid-tile [colspan]="2">
+        <img class="cart-image" src="{{'/api/public/image/' + item.image}}" />
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="4">
+        {{ item.name }}
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="4">
+        <button mat-icon-button (click)="removeItem(item)">
+          <mat-icon>delete_outlined</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="item.quantity > 1" (click)="removeQuantity(item)">
+          <mat-icon>remove</mat-icon>
+        </button>
+        {{ item.quantity }}
+        <button mat-icon-button (click)="addQuantity(item)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="2">
+        {{ coinType }} {{ item.quantity * item.unit_price  }}
+      </mat-grid-tile>
+      <mat-divider *ngIf="!last"></mat-divider>
+
+    </mat-grid-list>
+  </mat-card-content>
+  <mat-card-footer>
+    <button mat-button [routerLink]="['/checkout']">Comprar</button>
+  </mat-card-footer>
+</mat-card>

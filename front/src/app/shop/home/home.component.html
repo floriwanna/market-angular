@@ -1,6 +1,6 @@
     <mat-grid-list cols="4" rowHeight="100px">
       <mat-grid-tile (click)="showProduct(pro.id)" *ngFor="let pro of products" [colspan]="1" [rowspan]="1"
         [style.background]="pro.color">
-        {{pro.title}}
+        {{pro.name}}
       </mat-grid-tile>
     </mat-grid-list>
