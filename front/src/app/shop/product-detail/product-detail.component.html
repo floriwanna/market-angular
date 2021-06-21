@@ -1,7 +1,10 @@
-<span (click)="backPage()">
-  <mat-icon>arrow_back_ios_new</mat-icon>
-</span>
-<p>{{ product.name }}</p>
-<p>{{ product.unit_price }}</p>
-<label>Cantidad</label>
-<button (click)="addToCart()">Agregar al carrito</button>
+<form [formGroup]="productForm" (ngSubmit)="addToCart()">
+  <span (click)="backPage()">
+    <mat-icon>arrow_back_ios_new</mat-icon>
+  </span>
+  <p>{{ product.name }}</p>
+  <p>{{ product.unit_price }}</p>
+  <label>Cantidad</label>
+  <input matInput placeholder="quantity" formControlName="quantity" required>
+  <button type="submit">Agregar al carrito</button>
+</form>

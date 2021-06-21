@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product } from '../../model/product';
@@ -14,15 +15,19 @@ import { ProductsService } from '../services/products.service';
 export class ProductDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
     private productService: ProductsService,
     private location: Location,
+    private fb: FormBuilder,
     private cartService: CartService) {
     this.product.id = this.route.snapshot.paramMap.get('id');
   };
 
 
-  public quantity = 0;
+
+  productForm = this.fb.group({
+    quantity: ["", Validators.min(1)],
+  });
+
   public product = new Product();
   ngOnInit(): void {
 
@@ -40,6 +45,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   public addToCart() {
-    this.cartService.addQuantity(this.product); //quantity
+    if (this.productForm.valid) this.cartService.addQuantity(this.product);
   }
 }

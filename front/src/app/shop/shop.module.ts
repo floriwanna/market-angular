@@ -14,14 +14,19 @@ import { CartComponent } from './cart/cart.component';
 import { CartService } from './services/cart.service';
 import { CheckoutService } from './services/checkout.service';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ShopComponent, HomeComponent, ProductDetailComponent, CartComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
+    MatInputModule,
     MatGridListModule,
     RouterModule.forChild(ShopRoutes)
   ],
