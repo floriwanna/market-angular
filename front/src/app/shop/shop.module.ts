@@ -24,7 +24,6 @@ import { MatBadgeModule } from '@angular/material/badge';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatBadgeModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
