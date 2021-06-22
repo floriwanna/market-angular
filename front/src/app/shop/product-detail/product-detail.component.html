@@ -5,6 +5,12 @@
   <p>{{ product.name }}</p>
   <p>{{ product.unit_price }}</p>
   <label>Cantidad</label>
+
+  <div *ngIf="productForm.controls.quantity.touched && productForm.controls.quantity.invalid"
+    class="alert alert-danger">
+    <div *ngIf="productForm.controls.quantity.errors.required">Quantity is required.</div>
+  </div>
   <input matInput placeholder="quantity" formControlName="quantity" required>
+
   <button type="submit">Agregar al carrito</button>
 </form>

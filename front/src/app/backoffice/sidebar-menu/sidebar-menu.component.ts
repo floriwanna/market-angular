@@ -20,8 +20,12 @@ export class SidebarMenuComponent implements AfterViewInit, OnInit {
   @ViewChild('drawer') drawer: MatDrawer;
 
   ngOnInit(): void {
-    this.sidebarMenuService.getMenuItems().then(res => { this.menuElements = res; this.menuElements.unshift({ title: 'home', url: '' }) });
+    this.sidebarMenuService.getMenuItems().then(res => {
+      this.menuElements = res;
+      this.menuElements.unshift({ title: 'home', url: '' })
+    });
   }
+
   ngAfterViewInit(): void {
     this.sidebarMenuService.toggleObservable.subscribe(x => {
       if (x)

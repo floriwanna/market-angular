@@ -16,6 +16,7 @@ import { CheckoutService } from './services/checkout.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [ShopComponent, HomeComponent, ProductDetailComponent, CartComponent],
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatBadgeModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,

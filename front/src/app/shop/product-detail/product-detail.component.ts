@@ -30,14 +30,7 @@ export class ProductDetailComponent implements OnInit {
 
   public product = new Product();
   ngOnInit(): void {
-
     this.productService.getProduct(this.product.id).then(x => this.product = x);
-    // this.route.paramMap.pipe(
-    //   switchMap(params => {
-    //     this.selectedId = Number(params.get('id'));
-    //     // return this.service.getHeroes();
-    //   })
-    // );
   }
 
   public backPage() {
@@ -45,6 +38,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   public addToCart() {
-    if (this.productForm.valid) this.cartService.addQuantity(this.product);
+    if (this.productForm.valid) {
+      this.product.quantity = Number.parseInt(this.productForm.value.quantity);
+      this.cartService.addQuantity(this.product);
+    }
   }
 }
