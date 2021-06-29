@@ -1,5 +1,6 @@
 ## Tareas
-1.  Terminar flujo de compra sin log
+1.   
+2.  Terminar flujo de compra sin log
     1.  Acciones:
         1.  Boton agregar al carrito (tarjeta y pagina producto) 
 
