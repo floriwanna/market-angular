@@ -10,24 +10,36 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { SidebarMenuService } from './sidebar-menu/sidebar-menu.service';
 import { CustomerUserComponent } from './customer-user/customer-user.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductComponent } from './product/product.component';
+import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: "full", component: OfficeHomeComponent },
   { path: 'user', pathMatch: "full", component: CustomerUserComponent },
+  {
+    path: 'product', pathMatch: "full", component: ProductComponent, children:
+      [
+        { path: 'detail', pathMatch: "full", component: ProductDetailComponent },
+      ]
+  },
 ];
 
 @NgModule({
   declarations: [BackofficeComponent,
     SidebarMenuComponent,
-    CustomerUserComponent],
+    CustomerUserComponent,
+    ProductComponent,
+    ProductDetailComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MatSidenavModule,
     MatListModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ], providers: [SidebarMenuService]
 })
 export class BackofficeModule { }

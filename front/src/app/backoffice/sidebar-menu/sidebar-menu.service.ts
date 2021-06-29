@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -9,7 +10,7 @@ export class SidebarMenuService {
   private content = new BehaviorSubject<boolean>(false);
   public toggleObservable = this.content.asObservable();
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
 
@@ -21,7 +22,8 @@ export class SidebarMenuService {
 
   public getMenuItems(): Promise<SidebarMenuItem[]> {
     return new Promise((resolve, reject) => {
-      resolve([{ title: 'usuarios', url: '/user' }]);
+      this.http.get('/menu')
+      resolve([{ title: 'usuarios', url: '/user' }, { title: 'products', url: '/product' }]);
     })
   }
 }
