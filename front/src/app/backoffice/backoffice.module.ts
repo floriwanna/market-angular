@@ -13,16 +13,27 @@ import { CustomerUserComponent } from './customer-user/customer-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
-
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
-  { path: '', pathMatch: "full", component: OfficeHomeComponent },
-  { path: 'user', pathMatch: "full", component: CustomerUserComponent },
   {
-    path: 'product', pathMatch: "full", component: ProductComponent, children:
-      [
-        { path: 'detail', pathMatch: "full", component: ProductDetailComponent },
-      ]
+    path: '',
+    pathMatch: "full",
+    component: OfficeHomeComponent
+  },
+  {
+    path: 'user',
+    pathMatch: "full",
+    component: CustomerUserComponent
+  },
+  {
+    path: 'product', 
+    loadChildren:() => import('./product/product.routing').then(m => m.ProductRouting),
+    // pathMatch: "full", component: ProductComponent
+    // , children: [
+    //   { path: 'add', pathMatch: "full", component: ProductDetailComponent },
+    //   { path: 'detail/{id}', pathMatch: "full", component: ProductDetailComponent }
+    // ]
   },
 ];
 
@@ -39,7 +50,9 @@ const routes: Routes = [
     MatListModule,
     MatToolbarModule,
     MatIconModule,
+    MatButtonModule,
     HttpClientModule
   ], providers: [SidebarMenuService]
 })
+
 export class BackofficeModule { }

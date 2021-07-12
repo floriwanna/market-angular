@@ -28,11 +28,6 @@ const routes: Routes = [
         // canActivate: [AuthGuardService]
     },
     { path: 'login', pathMatch: "full", component: CustomerLoginComponent },
-    // {
-    //     path: "",
-    //     redirectTo: "home",
-    //     pathMatch: "full",
-    // },
     {
         path: "",
         component: ShopComponent,
