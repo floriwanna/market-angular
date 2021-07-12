@@ -8,7 +8,7 @@ import { Product } from "src/app/model/product";
 })
 export class CartService {
   constructor(route: ActivatedRoute) {
-    this.calcTotalQuantity(this.getList());
+    this.calcQuantityTot(this.getList());
   }
 
   get cart(): Product[] {
@@ -67,17 +67,17 @@ export class CartService {
   }
   private getList(): Product[] {
     let cart = window.localStorage.getItem("cartList");
-    if (!cart) return;
+    if (!cart) return [];
     let res = JSON.parse(cart);
-    return res ? res : [];
+    return res;
 
   }
   private setList(list: Product[]) {
-    this.calcTotalQuantity(list);
+    this.calcQuantityTot(list);
     window.localStorage.setItem("cartList", JSON.stringify(list));
   }
 
-  private calcTotalQuantity(list: Product[]) {
-    this.quantityItemsCart.next(list.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity || 0), 0));
+  private calcQuantityTot(list: Product[]) {
+    this.quantityItemsCart.next(list?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity || 0), 0));
   }
 }
