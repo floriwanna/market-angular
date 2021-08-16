@@ -1,7 +1,3 @@
-## Tareas
-1. Dockerize app
-
-
-## Pendientes
-1.  Interfaz pago
-2.  
+## Steps to follow 
+1.  Finish to dockerizing the application
+2.  Build the Backend before the code.
