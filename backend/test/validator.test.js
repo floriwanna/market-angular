@@ -9,7 +9,7 @@ describe('Array', function () {
 });
 
 describe('Validator.js', function () {
-    const validator = require('../../app/controller/validator');
+    const validator = require('./../app/service/validator');
     describe('function checkBodyStructure', () => {
         let body = { first_prop: 'value one', other_prop: 'other value', last_prop: 'last value' };
 

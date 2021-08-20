@@ -42,7 +42,7 @@ module.exports = function (db, secret) {
     }
   })
 
-  router.post("/add/image", upload.any(), (req, res, next) => {
+  router.post("/image", upload.any(), (req, res, next) => {
     // console.log(req.files)
     let bucket = require('mongodb').GridFSBucket;
     let gbucket = new bucket(db);
@@ -62,6 +62,8 @@ module.exports = function (db, secret) {
       });
     });
   });
+
+
 
   return router;
 
