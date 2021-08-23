@@ -1,8 +1,6 @@
 process.env.NODE_ENV = 'test';
-const index = require('../index');
 const app = new require('../app')({ collection: (name) => { return [] } }, 'secret');
 const request = require('supertest');
-
 
 describe('first HTTP test', function() {
     it('GET - /', function(){
@@ -10,7 +8,6 @@ describe('first HTTP test', function() {
         .get('/')
         .expect(200)
         .expect('Content-Type','text/html; charset=utf-8')
-        .expect('Hi there!');
-
-    })
+        .expect('Hi there!'); 
+    });
 });

@@ -1,19 +1,13 @@
 const parseJSON = require("body-parser").json();
 const Multer = require('multer');
+const ObjectId = require('mongodb').ObjectID;
 
 module.exports = function (db, secret) {
-    let router = required('express').Router();
+  let router = require('express').Router();
 
   let productsCollection = db.collection("products");
 
-    router.get("/:id", (req, res, next) => {
-    productsCollection.find({}).toArray((err, docs) => {
-      if (err) return next(err);
-      res.json(docs);
-    });
-  });
-
-  router.put("/add", parseJSON, (req, res, next) => {
+  router.post("/add", parseJSON, (req, res, next) => {
     console.error("Agregar validacion del body")
     let product = {
       id: ObjectId(),
@@ -23,14 +17,21 @@ module.exports = function (db, secret) {
       images: req.body.images
     };
 
-    productsCollection.insert(product, (err) => {
+    productsCollection.insertOne(product, (err) => {
       if (err) return next(err);
     });
 
-    res.status(201).end();
+    res.status(201).json({ id: product.id }).end();
   });
 
-   let upload = Multer({
+  router.get("/:id", (req, res, next) => {
+    productsCollection.find({}).toArray((err, docs) => {
+      if (err) return next(err);
+      res.status(200).json(docs).end();
+    });
+  });
+
+  let upload = Multer({
     fileFilter: (req, file, cb) => {
       // console.log(file)
       if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
