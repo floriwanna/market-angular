@@ -1,5 +1,5 @@
 const parseJSON = require("body-parser").json();
-const Multer = require('multer');
+const UploadImage = require('../../service/upload-img');
 const ObjectId = require('mongodb').ObjectID;
 
 module.exports = function (db, secret) {
@@ -21,7 +21,9 @@ module.exports = function (db, secret) {
       if (err) return next(err);
     });
 
-    res.status(201).json({ id: product.id }).end();
+    res.status(201).json({
+      id: product.id
+    }).end();
   });
 
   router.get("/:id", (req, res, next) => {
@@ -31,20 +33,9 @@ module.exports = function (db, secret) {
     });
   });
 
-  let upload = Multer({
-    fileFilter: (req, file, cb) => {
-      // console.log(file)
-      if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-        cb(null, true);
-      } else {
-        cb(null, false);
-        return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-      }
-    }
-  })
 
-  router.post("/image", upload.any(), (req, res, next) => {
-    // console.log(req.files)
+  router.post("/image", UploadImage.any(), (req, res, next) => {
+
     let bucket = require('mongodb').GridFSBucket;
     let gbucket = new bucket(db);
     let Redeable = require('stream');
@@ -56,7 +47,9 @@ module.exports = function (db, secret) {
     uploadStream.end(req.files[0].buffer, err => {
       if (err) return next(err)
 
-      let chunksQuery = db.collection('fs.files').find({ _id: id });
+      let chunksQuery = db.collection('fs.files').find({
+        _id: id
+      });
       chunksQuery.toArray(function (error, docs) {
         console.log(docs)
         res.json(id)

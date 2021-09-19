@@ -4,9 +4,9 @@ const productController = require('./../app/controller/admin/product');
 const request = require('supertest');
 
 describe('product', () => {
-    describe('add',()=>{
+    describe('actions', () => {
         let db;
-    
+
         let productAdminApp;
         before(async () => {
             db = await require('./mock-db');
@@ -17,7 +17,7 @@ describe('product', () => {
 
         let id;
 
-        it('post new', () => {
+        it('add - post', () => {
             // assert.strictEqual(db.databaseName, 'test', 'no es el mismo nombre');
             return request(productAdminApp)
                 .post('/add')
@@ -31,6 +31,8 @@ describe('product', () => {
         it('get/:id', async () => {
             // assert.strictEqual(db.databaseName, 'test', 'no es el mismo nombre');
             return request(productAdminApp).get(`/${id}`).expect(200);
-    });
+        });
+
+        it('update - put', async () => {})
     });
 });

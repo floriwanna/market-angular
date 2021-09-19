@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BackofficeComponent } from './backoffice.component';
-import { RouterModule, Routes } from '@angular/router';
 import { OfficeHomeComponent } from './office-home/office-home.component';
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -26,23 +26,31 @@ const routes: Routes = [
     pathMatch: "full",
     component: CustomerUserComponent
   },
+  // {
+  //   path: 'product',
+  //   loadChildren: () => import('./product/product.routing').then(m => m.ProductRouting),
+  // },
   {
-    path: 'product', 
-    loadChildren:() => import('./product/product.routing').then(m => m.ProductRouting),
-    // pathMatch: "full", component: ProductComponent
-    // , children: [
-    //   { path: 'add', pathMatch: "full", component: ProductDetailComponent },
-    //   { path: 'detail/{id}', pathMatch: "full", component: ProductDetailComponent }
-    // ]
+    path: "product",
+    component: ProductComponent,
+    children: [
+      {
+        path: "",
+        // resolve: {
+        //   currentPermissions: CurrentPermissionResolve,
+        // },
+        loadChildren: () =>
+          import("./product/product-back.module").then((x) => x.ProductBackModule),
+      },
+    ],
+    // canActivate: [AuthGuardService],
   },
 ];
 
 @NgModule({
   declarations: [BackofficeComponent,
     SidebarMenuComponent,
-    CustomerUserComponent,
-    ProductComponent,
-    ProductDetailComponent],
+    CustomerUserComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -51,7 +59,7 @@ const routes: Routes = [
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
   ], providers: [SidebarMenuService]
 })
 
