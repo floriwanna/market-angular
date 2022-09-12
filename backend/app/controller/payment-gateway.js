@@ -1,2 +1,3 @@
-function PaymentGateway() { }
-module.export = PaymentGateway;
+module.export = () => {
+
+}

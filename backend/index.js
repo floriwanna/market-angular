@@ -1,4 +1,5 @@
 #! /bin/env node
+
 module.exports = async function () {
     const path = require('path');
     let root = path.dirname(__dirname);
@@ -17,14 +18,19 @@ module.exports = async function () {
 
         const MongoMemoryServer = require('mongodb-memory-server').MongoMemoryServer;
 
-        const replset = await MongoMemoryServer.create({ replSet: { count: 4 } });
+        const replset = await MongoMemoryServer.create({
+            replSet: {
+                count: 4
+            }
+        });
         dbUrl = replset.getUri();
     } else {
         dbUrl = config.dbUrl;
     }
 
-    const dbConn = `${dbUrl}/${config.dbName}`;
-    console.log('dbCon',dbConn);
+    const dbConn = `mongodb://127.0.0.1:27017/${config.dbName}`;
+    // const dbConn = `${dbUrl}/${config.dbName}`;
+    console.log('dbCon', dbConn);
 
     MongoClient.connect(dbConn, {
         useUnifiedTopology: true
@@ -32,7 +38,8 @@ module.exports = async function () {
         if (err) throw err;
 
         const App = require('./app');
-        let app = new App(client.db('realestate'), config.secret);
+        // let app = new App(client.db('realestate'), config.secret);
+        let app = new App(client.db('MarketAngular'), config.secret);
         app.listen(config.port);
     })
 }();
