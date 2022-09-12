@@ -6,6 +6,7 @@ module.exports = async function () {
 
     let config = require('config');
     console.log(config);
+    console.log(config.util.getEnv('NODE_ENV'));
     const MongoClient = require('mongodb').MongoClient;
 
     let dbUrl;
@@ -23,13 +24,15 @@ module.exports = async function () {
     }
 
     const dbConn = `${dbUrl}/${config.dbName}`;
-    console.log(dbConn);
+    console.log('dbCon',dbConn);
 
     MongoClient.connect(dbConn, {
         useUnifiedTopology: true
     }, function (err, client) {
+        if (err) throw err;
+
         const App = require('./app');
-        let app = new App(client.db('market'), config.secret);
+        let app = new App(client.db('realestate'), config.secret);
         app.listen(config.port);
     })
 }();

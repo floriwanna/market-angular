@@ -2,11 +2,14 @@ const parseJSON = require("body-parser").json();
 const UploadImage = require('../../service/upload-img');
 const ObjectId = require('mongodb').ObjectID;
 
-module.exports = function (db, secret) {
+module.exports = function (db)  {
   let router = require('express').Router();
 
   let productsCollection = db.collection("products");
 
+  router.get('/', (req, res, next) => {
+    res.send("Admin Products").end();
+  })
   router.post("/add", parseJSON, (req, res, next) => {
     console.error("Agregar validacion del body")
     let product = {
@@ -34,7 +37,7 @@ module.exports = function (db, secret) {
   });
 
 
-  router.post("/image", UploadImage.any(), (req, res, next) => {
+  router.post("/image", UploadImage, (req, res, next) => {
 
     let bucket = require('mongodb').GridFSBucket;
     let gbucket = new bucket(db);
