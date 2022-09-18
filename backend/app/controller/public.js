@@ -13,6 +13,13 @@ module.exports = (db) => {
     res.end();
   })
 
+
+  const UploadImage = require('../service/upload-img');
+  router.post('/image', (req, res, next) => {
+    res.write('post');
+    res.end();
+  })
+
   return router;
 
 }

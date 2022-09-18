@@ -13,12 +13,14 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FloriTestComponent } from './flori-test/flori-test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerLoginComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    FloriTestComponent
   ],
   imports: [
     BrowserModule,

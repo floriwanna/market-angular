@@ -1,1 +1,23 @@
-completar formulario
+<mat-card>
+
+    <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput [formControl]="product.name" />
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>precio</mat-label>
+        <input matInput [formControl]="product.unit_price" />
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Descripcion</mat-label>
+        <input matInput [formControl]="product.descripcion" />
+    </mat-form-field>
+
+    <mat-label>Imagenes</mat-label>
+    <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"/> <button mat-raised-button
+        color="primary" type="submit">ok</button>
+    <button mat-raised-button color="" routerLink="admin/product">cancelar</button>
+
+</mat-card>

@@ -5,6 +5,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AdminLoginComponent } from "./admin-login/admin-login.component";
 import { BackofficeComponent } from "./backoffice/backoffice.component";
 import { CustomerLoginComponent } from "./customer-login/customer-login.component";
+import { FloriTestComponent } from "./flori-test/flori-test.component";
 import { ShopComponent } from "./shop/shop.component";
 
 
@@ -28,6 +29,7 @@ const routes: Routes = [
         // canActivate: [AuthGuardService]
     },
     { path: 'login', pathMatch: "full", component: CustomerLoginComponent },
+    { path: 'test', pathMatch: "full", component: FloriTestComponent },
     {
         path: "",
         component: ShopComponent,

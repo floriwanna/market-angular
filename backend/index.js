@@ -28,8 +28,8 @@ module.exports = async function () {
         dbUrl = config.dbUrl;
     }
 
-    const dbConn = `mongodb://127.0.0.1:27017/${config.dbName}`;
-    // const dbConn = `${dbUrl}/${config.dbName}`;
+    // const dbConn = `mongodb://127.0.0.1:27017/${config.dbName}`;
+    const dbConn = `${dbUrl}/${config.dbName}`;
     console.log('dbCon', dbConn);
 
     MongoClient.connect(dbConn, {

@@ -1,30 +1,27 @@
 const e = require("express");
 const {
-    add
+    add, debounce
 } = require("lodash");
 
 const parseJSON = require("body-parser").json();
 module.exports = (db) => {
     let router = require('express').Router();
 
-    let salesCollection = db.collection("sales");
-    /*
     router.get('/', (req, res, next) => {
         res.write('checkout');
         res.end();
     });
-    */
+
     router.post('/add', parseJSON, (req, res, next) => {
-        const addProduct = function () {
+        const finishAddignSale = () => {
             let products = [];
             if (req.body.products instanceof Array)
                 products = req.body.products;
             else
                 products.push(req.body.products);
 
-
             let sale = {
-                customer: customeid,
+                customer: customer_id,
                 date: Date.now(),
                 products: products,
                 total: products.reduce((t, c) => {
@@ -33,28 +30,50 @@ module.exports = (db) => {
                 paymentid: null,
             };
 
-            salesCollection.insertOne(sale, (err) => {
+            db.sales.insertOne(sale, (err) => {
                 if (err) return next(err);
-            })
+            });
+
+            db.customer.findOne({ _id: customer_id }, (err, doc) => {
+                if (err) next(err);
+
+                if (!doc) {
+                    if (doc.lasts_shoppings.length == 10)
+                        doc.lasts_shoppings.pop();
+                    doc.lasts_shoppings.unshift({
+                        sale_id: sale._id,
+                        date: sale.date,
+                        tot_products: sale.products.length
+                    })
+                    db.customer.updateOne({ _id: customer_id }, {
+                        $set: { lasts_shoppings: doc.lasts_shoppings },
+                        $currentDate: { lastModified: true }
+                    });
+                }
+            });
 
             res.status(201).json({
                 id: sale._id
             }).end();
         }
 
+
         if (!req.body === undefined || !req.body.email ||
             !req.body.products) res.status(403).end();
 
-        let customeid;
-        if (req.body.customerid) {
-            addProduct();
+        let customer_id;
+
+        if (req.body.customer_id) {
+            finishAddignSale(req.body.customer_id);
             next();
         }
-        let customerColection = db.collection('customer');
-        customerColection.findOne({
-                email: req.body.email,
-            },
+
+        db.customer.findOne({
+            email: req.body.email,
+        },
             (err, doc) => {
+                if (err) next(err);
+
                 if (!doc) {
 
                     let customer = {
@@ -62,18 +81,19 @@ module.exports = (db) => {
                         name: null,
                         lastname: null,
                         password: null,
-                        username: req.body.email
+                        username: req.body.email,
+                        sales: []
                     };
 
-                    customerColection.insertOne(
+                    db.customer.insertOne(
                         customer, (err) => {
                             if (err) return next(err);
                         });
-                    customeid = customer._id;
+                    customer_id = customer._id;
                 } else
-                    customeid = doc._id;
+                    customer_id = doc._id;
 
-                addProduct();
+                finishAddignSale(customer._id);
 
             });
 

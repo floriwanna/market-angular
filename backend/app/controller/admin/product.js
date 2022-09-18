@@ -36,13 +36,14 @@ module.exports = function (db) {
   });
 
 
-  router.post("/image", UploadImage, (req, res, next) => {
+  router.post("/image", (req, res, next) => {
+
+    let filename = `${(new Date()).getMonth()}-${(new Date()).getDate()}-${(new Date()).getHours()}-${(new Date()).getMinutes()}-${(new Date()).getSeconds()}.${req.files[0].originalname.split('.')[1]}`
 
     let bucket = require('mongodb').GridFSBucket;
     let gbucket = new bucket(db);
     let Redeable = require('stream');
 
-    let filename = `${(new Date()).getMonth()}-${(new Date()).getDate()}-${(new Date()).getHours()}-${(new Date()).getMinutes()}-${(new Date()).getSeconds()}.${req.files[0].originalname.split('.')[1]}`
 
     let uploadStream = gbucket.openUploadStreamWithId(ObjectId(), filename)
     let id = uploadStream.id;

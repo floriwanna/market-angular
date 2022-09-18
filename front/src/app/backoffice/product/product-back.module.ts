@@ -5,17 +5,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductLinearListComponent } from './product-linear-list/product-linear-list.component';
 import { RouterModule } from '@angular/router';
 import { ProductComponent } from './product.component';
+import { ProductBackService } from './product-back.service';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { ProductBackService } from './product-back.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
   declarations: [
     ProductLinearListComponent,
-    ProductComponent
-    // ProductFormComponent,
+    ProductComponent,
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,
@@ -23,11 +27,11 @@ import { ProductBackService } from './product-back.service';
     RouterModule.forChild(ProductAdminRoutes), RouterModule,
     MatTableModule,
     MatIconModule,
-    // MatButtonModule,
+    MatButtonModule,
     MatCardModule,
     // MatGridListModule,
-    // MatFormFieldModule,
-    // MatInputModule,
+    MatFormFieldModule,
+    MatInputModule,
     // MatMenuModule
   ],
   providers: [ProductBackService],

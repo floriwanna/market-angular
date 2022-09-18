@@ -1,4 +1,4 @@
-//const Multer = require('multer');
+const Multer = require('multer');
 
 module.exports = function () {
     return Multer({

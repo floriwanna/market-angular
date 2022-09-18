@@ -14,6 +14,13 @@ function App(db, secret) {
   const usersCollection = db.collection('users');
   const customerCollection = db.collection('customer');
 
+
+  const cors = require("cors");
+  const corsOptions = {
+    origin: 'http://localhost:4200'
+  }
+  app.use(cors(corsOptions));
+  
   app.use('/', require('./app/controller/public')(db));
 
   app.use('/products', require('./app/controller/product')(db));

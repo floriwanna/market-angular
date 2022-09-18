@@ -40,6 +40,7 @@
     "tingodb": "^0.6.1"
   },
   "devDependencies": {
+    "cors": "^2.8.5",
     "mocha": "^10.0.0"
   }
 }
